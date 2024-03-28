@@ -1,19 +1,19 @@
 CREATE TABLE pacientes (
-    id_paciente serial PRIMARY KEY,
+    id_paciente integer PRIMARY KEY,
     nome_paciente varchar (50),
     data_nascimento date
 )
 
 CREATE TABLE medicos (
-    id_medico serial PRIMARY KEY,
+    id_medico integer PRIMARY KEY,
     nome_medico varchar (50),
     especializacao varchar (50)
 )
 
 CREATE TABLE pacientes_medicos (
-    id_paciente serial,
-    constraint fk_paciente FOREIGN KEY (id_paciente) REFERENCES pacientes (id_paciente)
-    id_medico serial,
+    id_paciente integer,
+    constraint fk_paciente FOREIGN KEY (id_paciente) REFERENCES pacientes (id_paciente),
+    id_medico integer,
     constraint fk_medico FOREIGN KEY (id_medico) REFERENCES medicos (id_medico)
 )
 
@@ -52,3 +52,13 @@ INSERT INTO pacientes_medicos (id_paciente, id_medico) VALUES
 (8, 9), 
 (9, 6), 
 (10, 8); 
+
+-- Listar todos os pacientes de um médico específico.
+SELECT nome_paciente FROM (pacientes natural inner join pacientes_medicos) inner join medicos using (id_medico)
+where nome_medico = 'Dra. Márcia Pereira'
+
+-- Encontrar todos os médicos de um paciente específico.
+SELECT nome_medico FROM (medicos natural inner join pacientes_medicos) inner join pacientes using (id_paciente)
+where nome_paciente = 'Daniel Rocha'
+
+-- Contar o número médio de pacientes por médico.

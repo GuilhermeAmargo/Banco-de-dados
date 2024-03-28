@@ -12,7 +12,7 @@ CREATE TABLE funcionarios (
 
 CREATE TABLE funcionarios_projetos (
     id_funcionario serial,
-    CONSTRAINT fk_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionarios (id_funcionario)
+    CONSTRAINT fk_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionarios (id_funcionario),
     id_projeto serial,
     CONSTRAINT fk_projeto FOREIGN KEY (id_projeto) REFERENCES projetos (id_projeto)
 )
@@ -62,5 +62,3 @@ SELECT projetos.nome_projeto FROM (projetos natural inner join funcionarios_proj
 WHERE funcionarios.nome_funcionario = 'João Silva'
 
 -- Calcular a média de funcionários por projeto.
-SELECT avg(id_funcionario), projetos.nome_projeto FROM (projetos natural inner join funcionarios_projetos) inner join funcionarios using (id_funcionario)
-WHERE projetos.nome_projeto = 'Aplicativo de Monitoramento de Saúde'

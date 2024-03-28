@@ -1,25 +1,25 @@
 CREATE TABLE cursos (
-    id_curso serial PRIMARY KEY,
+    id_curso integer PRIMARY KEY,
     nome_curso varchar (50)
 )
 
 CREATE TABLE alunos (
-    id_aluno serial PRIMARY KEY,
+    id_aluno integer PRIMARY KEY,
     nome_aluno varchar (50),
     data_nascimento date
 )
 
 CREATE TABLE turmas (
-    id_turma serial PRIMARY KEY,
-    id_curso serial,
+    id_turma integer PRIMARY KEY,
+    id_curso integer,
     CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES cursos (id_curso),
     nome_professor varchar (50)
 )
 
 CREATE TABLE alunos_turmas (
-    id_turma serial,
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turmas (id_turma)
-    id_aluno serial,
+    id_turma integer,
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turmas (id_turma),
+    id_aluno integer,
     CONSTRAINT fk_aluno FOREIGN KEY (id_aluno) REFERENCES alunos (id_aluno)
 )
 
@@ -77,5 +77,14 @@ INSERT INTO alunos_turmas (id_turma, id_aluno) VALUES
 (4, 10);
 
 -- Listar todos os alunos matriculados em uma turma específica.
-SELECT nome_aluno FROM (alunos natural inner join alunos_turmas) inner join cursos using (id_curso)
+SELECT nome_aluno FROM (alunos natural inner join alunos_turmas) inner join turmas using (id_turma)
 where id_turma = '1'
+
+-- Encontrar todos os cursos ministrados em uma turma específica.
+SELECT turmas.id_turma, cursos.nome_curso FROM (cursos INNER JOIN turmas ON cursos.id_curso = turmas.id_curso)
+WHERE turmas.id_turma = '2';
+
+-- Contar o número de alunos em cada turma
+SELECT count(alunos.id_aluno) FROM alunos inner join alunos_turmas using (id_aluno)
+where id_turma = '4'
+
