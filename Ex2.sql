@@ -12,7 +12,7 @@ CREATE TABLE alunos (
 CREATE TABLE turmas (
     id_turma serial PRIMARY KEY,
     id_curso serial,
-    CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES cursos (id_curso)
+    CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES cursos (id_curso),
     nome_professor varchar (50)
 )
 
@@ -75,3 +75,7 @@ INSERT INTO alunos_turmas (id_turma, id_aluno) VALUES
 (3, 8),
 (3, 9),
 (4, 10);
+
+-- Listar todos os alunos matriculados em uma turma específica.
+SELECT nome_aluno FROM (alunos natural inner join alunos_turmas) inner join cursos using (id_curso)
+where id_turma = '1'

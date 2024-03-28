@@ -2,7 +2,7 @@ CREATE TABLE livros (
     isbn SERIAL PRIMARY KEY,
     titulo varchar (50),
     editora varchar (50),
-    ano date
+    ano serial
 )
 
 CREATE TABlE autores (
@@ -55,4 +55,15 @@ INSERT INTO livros_autores (id_autor,isbn) VALUES
 (7, '45'), 
 (8, '23'), 
 (9, '68'), 
-(10, '95'); 
+(10, '95');
+
+-- Listar todos os livros e seus autores.
+SELECT livros.titulo, autores.nome_autor FROM (livros natural inner join livros_autores) inner join autores using (id_autor)
+
+-- Encontrar todos os livros escritos por um autor específico.
+SELECT livros.titulo FROM (livros natural inner join livros_autores) inner join autores using (id_autor)
+where nome_autor = 'George Orwell'
+
+-- Encontrar todos os autores que escreveram um livro específico.
+SELECT nome_autor FROM (autores natural inner join livros_autores) inner join livros using (isbn)
+where titulo = 'The Hobbit'
