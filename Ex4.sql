@@ -62,3 +62,9 @@ SELECT nome_medico FROM (medicos natural inner join pacientes_medicos) inner joi
 where nome_paciente = 'Daniel Rocha'
 
 -- Contar o número médio de pacientes por médico.
+SELECT AVG(num_pacientes) AS media_pacientes_por_medico
+FROM (
+    SELECT id_medico, COUNT(id_paciente) AS num_pacientes
+    FROM pacientes_medicos
+    GROUP BY id_medico
+) AS subquery;
