@@ -62,3 +62,10 @@ SELECT projetos.nome_projeto FROM (projetos natural inner join funcionarios_proj
 WHERE funcionarios.nome_funcionario = 'João Silva'
 
 -- Calcular a média de funcionários por projeto.
+SELECT AVG(num_funcionarios) AS media_funcionarios_por_projeto
+FROM (
+    SELECT id_projeto, COUNT(id_funcionario) AS num_funcionarios
+    FROM funcionarios_projetos
+    GROUP BY id_projeto
+) AS subquery;
+
