@@ -65,4 +65,4 @@ WHERE nome_funcionario = 'Ana Beatriz'
 
 -- Calcular o número total de funcionários gerenciados por cada gerente.
 SELECT count(id_funcionario) FROM departamentos inner join gerentes using (id_gerente)
-where nome_gerente = 'Mariana Silva'
+where nome_gerente = 'Mariana Silva';
