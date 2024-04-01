@@ -53,15 +53,15 @@ INSERT INTO pacientes_medicos (id_paciente, id_medico) VALUES
 (9, 6), 
 (10, 8); 
 
--- Listar todos os pacientes de um médico específico.
+-- Listar todos os pacientes de um médico específico
 SELECT nome_paciente FROM (pacientes natural inner join pacientes_medicos) inner join medicos using (id_medico)
 where nome_medico = 'Dra. Márcia Pereira'
 
--- Encontrar todos os médicos de um paciente específico.
+-- Encontrar todos os médicos de um paciente específico
 SELECT nome_medico FROM (medicos natural inner join pacientes_medicos) inner join pacientes using (id_paciente)
 where nome_paciente = 'Daniel Rocha'
 
--- Contar o número médio de pacientes por médico.
+-- Contar o número médio de pacientes por médico
 SELECT AVG(num_pacientes) AS media_pacientes_por_medico
 FROM (
     SELECT id_medico, COUNT(id_paciente) AS num_pacientes
