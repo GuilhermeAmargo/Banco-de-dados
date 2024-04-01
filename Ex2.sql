@@ -76,11 +76,11 @@ INSERT INTO alunos_turmas (id_turma, id_aluno) VALUES
 (3, 9),
 (4, 10);
 
--- Listar todos os alunos matriculados em uma turma específica.
+-- Listar todos os alunos matriculados em uma turma específica
 SELECT nome_aluno FROM (alunos natural inner join alunos_turmas) inner join turmas using (id_turma)
 where id_turma = '1'
 
--- Encontrar todos os cursos ministrados em uma turma específica.
+-- Encontrar todos os cursos ministrados em uma turma específica
 SELECT turmas.id_turma, cursos.nome_curso FROM (cursos INNER JOIN turmas ON cursos.id_curso = turmas.id_curso)
 WHERE turmas.id_turma = '2';
 
