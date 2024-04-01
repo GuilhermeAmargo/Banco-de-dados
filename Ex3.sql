@@ -57,11 +57,11 @@ INSERT INTO funcionarios_projetos (id_funcionario, id_projeto) VALUES
 SELECT funcionarios.nome_funcionario, projetos.nome_projeto FROM (projetos natural inner join funcionarios_projetos) inner join funcionarios using (id_funcionario)
 WHERE projetos.nome_projeto = 'Aplicativo de Monitoramento de Saúde'
 
--- Encontrar todos os projetos em que um funcionário específico está envolvido.
+-- Encontrar todos os projetos em que um funcionário específico está envolvido
 SELECT projetos.nome_projeto FROM (projetos natural inner join funcionarios_projetos) inner join funcionarios using (id_funcionario)
 WHERE funcionarios.nome_funcionario = 'João Silva'
 
--- Calcular a média de funcionários por projeto.
+-- Calcular a média de funcionários por projeto
 SELECT AVG(num_funcionarios) AS media_funcionarios_por_projeto
 FROM (
     SELECT id_projeto, COUNT(id_funcionario) AS num_funcionarios
